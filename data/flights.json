@@ -1,0 +1,15 @@
+[
+  {
+    "airline": "Turkish Airlines",
+    "alliance": "Star Alliance",
+    "from": "Dubai",
+    "to": "Tokyo",
+    "departure_date": "2024-08-15",
+    "return_date": "2024-08-30",
+    "layovers": [
+      "Istanbul"
+    ],
+    "price_usd": 950,
+    "refundable": true
+  }
+]

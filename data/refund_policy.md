@@ -1,0 +1,1 @@
+Refundable tickets can be canceled up to 48 hours before departure, subject to a 10% processing fee.

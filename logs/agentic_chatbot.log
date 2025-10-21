@@ -1,0 +1,251 @@
+2025-10-21 18:20:36,123 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:20:38,057 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:20:38,058 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:20:38,058 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:20:38,077 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:20:44,263 | INFO | agentic_chatbot | Starting chat loop.
+2025-10-21 18:20:48,106 | INFO | agentic_chatbot | User query: Do UAE passport holders need a visa for Japan?
+2025-10-21 18:20:48,145 | INFO | agentic_chatbot.graph | Guardrail check complete. blocked=False
+2025-10-21 18:20:48,186 | INFO | agentic_chatbot.graph | Routing to primary node.
+2025-10-21 18:20:48,195 | INFO | agentic_chatbot.primary | Primary routing started (LLM-only).
+2025-10-21 18:20:48,196 | INFO | agentic_chatbot.openai | openai_generate(chat.completions) call
+2025-10-21 18:20:52,991 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:20:53,006 | INFO | agentic_chatbot.primary | Primary LLM intent: policy_visa
+2025-10-21 18:20:53,007 | INFO | agentic_chatbot.primary | Primary routing decided: policy_visa
+2025-10-21 18:20:53,008 | INFO | agentic_chatbot.graph | Routing to faq node.
+2025-10-21 18:20:53,008 | INFO | agentic_chatbot.faq | Entering FAQ Agent (Chat Completions tool-calling).
+2025-10-21 18:20:53,011 | INFO | agentic_chatbot.openai | Starting CC tool loop with 1 tools; max_rounds=3
+2025-10-21 18:20:53,011 | INFO | agentic_chatbot.openai | CC Round 1 -> calling model with 2 messages
+2025-10-21 18:20:55,088 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:20:55,093 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 18:20:55,093 | INFO | agentic_chatbot.openai | Executing tool 'rag_search' with args: {"question":"Do UAE passport holders need a visa for Japan?"}
+2025-10-21 18:20:55,094 | ERROR | agentic_chatbot.openai | Tool 'rag_search' failed.
+Traceback (most recent call last):
+  File "D:\kavak_agentic_chatbot\graph\openai_client.py", line 116, in openai_tool_loop
+    out_text = fn(args_str) if fn else json.dumps({"error": f"Unknown tool: {name}"})
+               ~~^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 513, in invoke
+    return self.run(tool_input, **kwargs)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 774, in run
+    raise error_to_raise
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 743, in run
+    response = context.run(self._run, *tool_args, **tool_kwargs)
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\structured.py", line 93, in _run
+    return self.func(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\tools\tools.py", line 29, in rag_search
+    hits = rag_retrieve(question, base='data')
+           ^^^^^^^^^^^^
+NameError: name 'rag_retrieve' is not defined
+2025-10-21 18:20:55,171 | INFO | agentic_chatbot.openai | CC Round 2 -> calling model with 4 messages
+2025-10-21 18:20:57,095 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:20:57,096 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 18:20:57,097 | INFO | agentic_chatbot.openai | Executing tool 'rag_search' with args: {"question":"Do UAE passport holders need a visa for Japan?"}
+2025-10-21 18:20:57,137 | ERROR | agentic_chatbot.openai | Tool 'rag_search' failed.
+Traceback (most recent call last):
+  File "D:\kavak_agentic_chatbot\graph\openai_client.py", line 116, in openai_tool_loop
+    out_text = fn(args_str) if fn else json.dumps({"error": f"Unknown tool: {name}"})
+               ~~^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 513, in invoke
+    return self.run(tool_input, **kwargs)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 774, in run
+    raise error_to_raise
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 743, in run
+    response = context.run(self._run, *tool_args, **tool_kwargs)
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\structured.py", line 93, in _run
+    return self.func(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\tools\tools.py", line 29, in rag_search
+    hits = rag_retrieve(question, base='data')
+           ^^^^^^^^^^^^
+NameError: name 'rag_retrieve' is not defined
+2025-10-21 18:20:57,139 | INFO | agentic_chatbot.openai | CC Round 3 -> calling model with 6 messages
+2025-10-21 18:20:58,663 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:20:58,665 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 18:20:58,666 | INFO | agentic_chatbot.openai | Executing tool 'rag_search' with args: {"question":"Do UAE passport holders need a visa for Japan?"}
+2025-10-21 18:20:58,667 | ERROR | agentic_chatbot.openai | Tool 'rag_search' failed.
+Traceback (most recent call last):
+  File "D:\kavak_agentic_chatbot\graph\openai_client.py", line 116, in openai_tool_loop
+    out_text = fn(args_str) if fn else json.dumps({"error": f"Unknown tool: {name}"})
+               ~~^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 513, in invoke
+    return self.run(tool_input, **kwargs)
+           ~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 774, in run
+    raise error_to_raise
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\base.py", line 743, in run
+    response = context.run(self._run, *tool_args, **tool_kwargs)
+  File "D:\kavak_agentic_chatbot\venv\Lib\site-packages\langchain_core\tools\structured.py", line 93, in _run
+    return self.func(*args, **kwargs)
+           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "D:\kavak_agentic_chatbot\tools\tools.py", line 29, in rag_search
+    hits = rag_retrieve(question, base='data')
+           ^^^^^^^^^^^^
+NameError: name 'rag_retrieve' is not defined
+2025-10-21 18:20:58,670 | WARNING | agentic_chatbot.openai | Max rounds reached; requesting final JSON once more.
+2025-10-21 18:21:01,262 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:21:01,267 | INFO | agentic_chatbot.faq | FAQ Agent answer: UAE passport holders do not need a visa to enter Japan for short stays of up to 90 days for tourism, business, or visiting friends and family.
+2025-10-21 18:21:01,269 | INFO | agentic_chatbot | Response: UAE passport holders do not need a visa to enter Japan for short stays of up to 90 days for tourism, business, or visiting friends and family.
+2025-10-21 18:38:23,222 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:38:25,077 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:38:25,077 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:38:25,077 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:38:25,097 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:39:04,306 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:39:06,162 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:39:06,163 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:39:06,163 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:39:06,184 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:39:14,627 | INFO | agentic_chatbot | Starting chat loop.
+2025-10-21 18:39:17,665 | INFO | agentic_chatbot | User query: Do UAE passport holders need a visa for Japan?
+2025-10-21 18:39:17,718 | INFO | agentic_chatbot.graph | Guardrail check complete. blocked=False
+2025-10-21 18:39:17,720 | INFO | agentic_chatbot.graph | Routing to primary node.
+2025-10-21 18:39:17,734 | INFO | agentic_chatbot.primary | Primary routing started (LLM-only).
+2025-10-21 18:39:17,734 | INFO | agentic_chatbot.openai | openai_generate(chat.completions) call
+2025-10-21 18:39:22,896 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:39:22,925 | INFO | agentic_chatbot.primary | Primary LLM intent: policy_visa
+2025-10-21 18:39:22,926 | INFO | agentic_chatbot.primary | Primary routing decided: policy_visa
+2025-10-21 18:39:22,927 | INFO | agentic_chatbot.graph | Routing to faq node.
+2025-10-21 18:39:22,928 | INFO | agentic_chatbot.faq | Entering FAQ Agent (Chat Completions tool-calling).
+2025-10-21 18:39:22,931 | INFO | agentic_chatbot.openai | Starting CC tool loop with 1 tools; max_rounds=3
+2025-10-21 18:39:22,932 | INFO | agentic_chatbot.openai | CC Round 1 -> calling model with 2 messages
+2025-10-21 18:39:24,831 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:39:24,839 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 18:39:24,839 | INFO | agentic_chatbot.openai | Executing tool 'rag_search' with args: {"question":"Do UAE passport holders need a visa for Japan?"}
+2025-10-21 18:39:24,842 | INFO | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-10-21 18:39:24,842 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-10-21 18:39:30,041 | INFO | agentic_chatbot.openai | Tool 'rag_search' ok; output length=532
+2025-10-21 18:39:30,041 | INFO | agentic_chatbot.openai | CC Round 2 -> calling model with 4 messages
+2025-10-21 18:39:40,061 | INFO | openai._base_client | Retrying request to /chat/completions in 0.435959 seconds
+2025-10-21 18:39:50,676 | INFO | openai._base_client | Retrying request to /chat/completions in 0.886547 seconds
+2025-10-21 18:43:17,867 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:43:19,649 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:43:19,650 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:43:19,650 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:43:19,673 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:44:00,455 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:44:02,288 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:44:02,289 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:44:02,289 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:44:02,313 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:44:07,910 | INFO | agentic_chatbot | Starting chat loop.
+2025-10-21 18:45:32,074 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:45:33,908 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:45:33,909 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:45:33,909 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:45:33,938 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:46:35,686 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:46:37,580 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:46:37,581 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:46:37,582 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:46:37,626 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:47:37,768 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:47:39,661 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:47:39,661 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:47:39,662 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:47:39,683 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:47:45,405 | INFO | agentic_chatbot | Starting chat loop.
+2025-10-21 18:50:10,213 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:50:11,988 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:50:11,989 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:50:11,989 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:50:12,011 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:50:17,527 | INFO | agentic_chatbot | Starting chat loop.
+2025-10-21 18:50:21,970 | INFO | agentic_chatbot | User query: Do UAE passport holders need a visa for Japan?
+2025-10-21 18:50:22,015 | INFO | agentic_chatbot.graph | Guardrail check complete. blocked=False
+2025-10-21 18:50:22,017 | INFO | agentic_chatbot.graph | Routing to primary node.
+2025-10-21 18:50:22,029 | INFO | agentic_chatbot.primary | Primary routing started (LLM-only).
+2025-10-21 18:50:22,029 | INFO | agentic_chatbot.openai | openai_generate(chat.completions) call
+2025-10-21 18:50:32,775 | INFO | openai._base_client | Retrying request to /chat/completions in 0.433868 seconds
+2025-10-21 18:50:40,994 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:50:41,031 | INFO | agentic_chatbot.primary | Primary LLM intent: policy_visa
+2025-10-21 18:50:41,032 | INFO | agentic_chatbot.primary | Primary routing decided: policy_visa
+2025-10-21 18:50:41,034 | INFO | agentic_chatbot.graph | Routing to faq node.
+2025-10-21 18:50:41,034 | INFO | agentic_chatbot.faq | Entering FAQ Agent (Chat Completions tool-calling).
+2025-10-21 18:50:41,036 | INFO | agentic_chatbot.openai | Starting CC tool loop with 1 tools; max_rounds=3
+2025-10-21 18:50:41,036 | INFO | agentic_chatbot.openai | CC Round 1 -> calling model with 2 messages
+2025-10-21 18:50:42,750 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:50:42,755 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 18:50:42,756 | INFO | agentic_chatbot.openai | Executing tool 'rag_search' with args: {"question":"Do UAE passport holders need a visa for Japan?"}
+2025-10-21 18:50:42,762 | INFO | sentence_transformers.SentenceTransformer | Use pytorch device_name: cpu
+2025-10-21 18:50:42,762 | INFO | sentence_transformers.SentenceTransformer | Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+2025-10-21 18:50:47,494 | INFO | agentic_chatbot.openai | Tool 'rag_search' ok; output length=532
+2025-10-21 18:50:47,494 | INFO | agentic_chatbot.openai | CC Round 2 -> calling model with 4 messages
+2025-10-21 18:50:50,506 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 18:50:50,940 | INFO | agentic_chatbot.openai | Assistant produced final text (no further tool calls).
+2025-10-21 18:50:50,941 | INFO | agentic_chatbot.faq | FAQ Agent answer: UAE passport holders can enter Japan visa-free for up to 30 days for tourism. The passport must be valid for at least 6 months.
+2025-10-21 18:50:50,943 | INFO | agentic_chatbot | Response: UAE passport holders can enter Japan visa-free for up to 30 days for tourism. The passport must be valid for at least 6 months.
+2025-10-21 18:52:20,118 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:52:21,943 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:52:21,943 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:52:21,944 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:52:21,968 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:53:32,943 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 18:53:34,819 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 18:53:34,819 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 18:53:34,820 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 18:53:34,843 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 18:53:40,137 | INFO | agentic_chatbot | Starting chat loop.
+2025-10-21 19:25:19,647 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 19:25:22,508 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 19:25:22,509 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 19:25:22,510 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 19:25:22,536 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 19:25:33,053 | INFO | agentic_chatbot | Starting chat loop.
+2025-10-21 19:25:36,112 | INFO | agentic_chatbot | User query: Find me a round trip from Dubai to Tokyo in August under $1000, Star Alliance
+2025-10-21 19:25:36,159 | INFO | agentic_chatbot.graph | Guardrail check complete. blocked=False
+2025-10-21 19:25:36,160 | INFO | agentic_chatbot.graph | Routing to primary node.
+2025-10-21 19:25:36,164 | INFO | agentic_chatbot.primary | Primary routing started (LLM-only).
+2025-10-21 19:25:36,164 | INFO | agentic_chatbot.openai | openai_generate(chat.completions) call
+2025-10-21 19:25:46,849 | INFO | openai._base_client | Retrying request to /chat/completions in 0.387156 seconds
+2025-10-21 19:25:49,345 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 19:25:51,385 | INFO | agentic_chatbot.primary | Primary LLM intent: schedule_search
+2025-10-21 19:25:51,386 | INFO | agentic_chatbot.primary | Primary routing decided: schedule_search
+2025-10-21 19:25:51,387 | INFO | agentic_chatbot.graph | Routing to flight node.
+2025-10-21 19:25:51,387 | INFO | agentic_chatbot.flight | Entering Flight Agent (Chat Completions tool-calling).
+2025-10-21 19:25:51,393 | INFO | agentic_chatbot.openai | Starting CC tool loop with 1 tools; max_rounds=4
+2025-10-21 19:25:51,394 | INFO | agentic_chatbot.openai | CC Round 1 -> calling model with 2 messages
+2025-10-21 19:25:53,310 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 19:25:53,315 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 19:25:53,316 | INFO | agentic_chatbot.openai | Executing tool 'flight_filter' with args: {"criteria_json":"{\"origin\":\"Dubai\",\"destination\":\"Tokyo\",\"month_hint\":\"August\",\"alliance\":\"Star Alliance\",\"max_price_usd\":1000,\"non_stop_only\":null,\"refundable_only\":null}"}
+2025-10-21 19:25:53,318 | INFO | agentic_chatbot.openai | Tool 'flight_filter' ok; output length=2
+2025-10-21 19:25:53,318 | INFO | agentic_chatbot.openai | CC Round 2 -> calling model with 4 messages
+2025-10-21 19:25:55,493 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 19:25:56,943 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 19:25:56,943 | INFO | agentic_chatbot.openai | Executing tool 'flight_filter' with args: {"criteria_json":"{\"origin\":\"Dubai\",\"destination\":\"Tokyo\",\"month_hint\":\"August\",\"alliance\":null,\"max_price_usd\":1000,\"non_stop_only\":null,\"refundable_only\":null}"}
+2025-10-21 19:25:56,946 | INFO | agentic_chatbot.openai | Tool 'flight_filter' ok; output length=2
+2025-10-21 19:25:56,946 | INFO | agentic_chatbot.openai | CC Round 3 -> calling model with 6 messages
+2025-10-21 19:25:58,648 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 19:25:58,652 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 19:25:58,653 | INFO | agentic_chatbot.openai | Executing tool 'flight_filter' with args: {"criteria_json":"{\"origin\":\"Dubai\",\"destination\":\"Tokyo\",\"month_hint\":\"August\",\"alliance\":\"Star Alliance\",\"max_price_usd\":null,\"non_stop_only\":null,\"refundable_only\":null}"}
+2025-10-21 19:25:58,655 | INFO | agentic_chatbot.openai | Tool 'flight_filter' ok; output length=2
+2025-10-21 19:25:58,655 | INFO | agentic_chatbot.openai | CC Round 4 -> calling model with 8 messages
+2025-10-21 19:26:01,502 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 19:26:01,504 | INFO | agentic_chatbot.openai | Model issued 1 tool call(s)
+2025-10-21 19:26:01,505 | INFO | agentic_chatbot.openai | Executing tool 'flight_filter' with args: {"criteria_json":"{\"origin\":\"Dubai\",\"destination\":\"Tokyo\",\"month_hint\":\"August\",\"alliance\":null,\"max_price_usd\":null,\"non_stop_only\":null,\"refundable_only\":null}"}
+2025-10-21 19:26:01,507 | INFO | agentic_chatbot.openai | Tool 'flight_filter' ok; output length=2
+2025-10-21 19:26:01,508 | WARNING | agentic_chatbot.openai | Max rounds reached; requesting final JSON once more.
+2025-10-21 19:26:03,845 | INFO | httpx | HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-21 19:26:03,858 | INFO | agentic_chatbot.flight | Flight Agent response composed (0 itineraries).
+2025-10-21 19:26:03,859 | INFO | agentic_chatbot | Response: No matching itineraries found for Dubai → Tokyo | August | Star Alliance | ≤ $1000.
+2025-10-21 19:26:27,113 | INFO | agentic_chatbot | Logger initialized.
+2025-10-21 19:26:29,675 | INFO | faiss.loader | Loading faiss with AVX512 support.
+2025-10-21 19:26:29,676 | INFO | faiss.loader | Could not load library with AVX512 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx512'")
+2025-10-21 19:26:29,676 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2025-10-21 19:26:29,724 | INFO | faiss.loader | Successfully loaded faiss with AVX2 support.
+2025-10-21 19:26:38,131 | INFO | agentic_chatbot | Starting chat loop.
